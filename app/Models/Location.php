@@ -11,8 +11,5 @@ class Location extends Model
 
     protected $table = 'locations';
 
-    public function inventory()
-    {
-        return $this->hasMany(Inventory::class, 'loc_id', 'id');
-    }
+    
 }

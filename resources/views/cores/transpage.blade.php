@@ -17,17 +17,23 @@
         </thead>
         <tbody>
             <div hidden>{{$i = 1}}</div>
-            @foreach($items as $item)
-						<tr>
-							<td>{{ $i++ }}</td>
-							<td>{{ $item->loc_id }}</td>
-							<td>
-								@foreach($item->user as $t)
-									{{$t}},
-								@endforeach
-							</td>
-						</tr>
-			@endforeach
+            @foreach($datas as $item)
+            <tr>
+                <td>{{ $i++ }}</td>
+                <td>{{ $item->item->name }}</td>
+                <td>{{ $item->item->quantity }}</td>
+                <td>level, id:{{ $item->loc_id }}</td>
+                <td>Shelf</td>
+                <td>{{ $item->date_in }}</td>
+                <td>{{ $item->date_out }}</td>
+                <td>
+                    <div class="d-grid gap-2 d-md-block">
+                        <button class="btn btn-warning" type="button">edit</button>
+                        <button class="btn btn-danger" type="button">delete</button>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

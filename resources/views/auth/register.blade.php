@@ -9,19 +9,26 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <style>
+            /* Style the form */
+            #regForm {
+                background-color: #ffffff;
+                margin: 100px auto;
+                padding: 40px;
+                width: 70%;
+                min-width: 300px;
+            }
+
+            /* Mark input boxes that gets an error on validation: */
+            input.invalid {
+                background-color: #ffdddd;
+            }
+
             /* Hide all steps by default: */
-            .page {
+            .tab {
                 display: none;
             }
 
-            button:hover {
-                opacity: 0.8;
-            }
-
-            #prevBtn {
-                background-color: #bbbbbb;
-            }
-
+            /* Make circles that indicate the steps of the form: */
             .step {
                 height: 15px;
                 width: 15px;
@@ -33,138 +40,159 @@
                 opacity: 0.5;
             }
 
+            /* Mark the active step: */
             .step.active {
                 opacity: 1;
             }
 
+            /* Mark the steps that are finished and valid: */
             .step.finish {
-                background-color: #4CAF50;
+                background-color: #04AA6D;
             }
         </style>
 
-        <form method="POST" id="regForm">
+        <form id="regForm" action="" method="POST">
             @csrf
-            <div class="col card">
-                <div class="page" style="display: none;">
-                    <!-- Name -->
-                    <div class=" m-3 row">
-                        <input id="first_name" type="text" name="first_name" class="form-control" placeholder="First name">
-                    </div>
-
-                    <div class="m-3 row">
-                        <input id="last_name" type="text" name="last_name" class="form-control" placeholder="Last name" required>
-                    </div>
-
-                    <!-- Email Address -->
-                    <div class="m-3 row">
-                        <input id="email" type="email" name="email" class="form-control" placeholder="example@mail.com" required>
-                    </div>
-
-                    <!-- Password -->
-                    <div class="m-3 row">
-                        <input id="password" type="password" name="password" class="form-control" placeholder="Password" required autocomplete="new-password">
-                    </div>
-
-                    <!-- Phone  -->
-                    <div class="m-3 row">
-                        <input id="phone" type="tel" name="phone" class="form-control" placeholder="Phone">
-                    </div>
-
-                    <!-- Address -->
-                    <div class="m-3 row">
-                        <input id="address" name="address" type="text" class="form-control" placeholder="Address">
-                        <textarea class="form-control" id="addresss" name="addresss" rows="3"></textarea>
-                    </div>
+            <!-- One "tab" for each step in the form: -->
+            <div class="tab">
+                <!-- Name -->
+                <div class=" ">
+                    <input id="first_name" type="text" name="first_name" class="form-control" placeholder="First name">
                 </div>
-                <div class="page" style="display: none;">
-                    <!-- Select Question -->
-                    <div class="m-3 row">
-                        <x-label :value="__('Questions')" />
-                        <select class="form-control" name="question" id="question">
-                            <option value="Q_1">Sokap Nama bokap</option>
-                            <option value="Q_2">Nama Nyokap</option>
-                            <option value="Q_3">Nama Sokap</option>
-                            <option value="Q_4">Nama Diskpa</option>
-                            <option value="Q_5">Nama Tukap</option>
-                        </select>
-                    </div>
 
-                    <!-- Anwser -->
-                    <div class="m-3 row">
-                        <label for="answer">Your Anwser</label>
-                        <input type="text" class="form-control" id="answer" name="answer" placeholder="Your Anwser">
-                    </div>
+                <div class="">
+                    <input id="last_name" type="text" name="last_name" class="form-control" placeholder="Last name" required>
+                </div>
+
+                <!-- Email Address -->
+                <div class="">
+                    <input id="email" type="email" name="email" class="form-control" placeholder="example@mail.com" required>
+                </div>
+
+                <!-- Password -->
+                <div class="">
+                    <input id="password" type="password" name="password" class="form-control" placeholder="Password" required autocomplete="new-password">
+                </div>
+
+                <!-- Phone  -->
+                <div class="">
+                    <input id="phone" type="tel" name="phone" class="form-control" placeholder="Phone">
+                </div>
+
+                <!-- Address -->
+                <div class="">
+                    <input id="address" name="address" type="text" class="form-control" placeholder="Address">
                 </div>
             </div>
 
+            <div class="tab">Contact Info:
+                <!-- Select Question -->
+                <div class="">
+                    <x-label :value="__('Questions')" />
+                    <select class="form-control" name="question" id="question">
+                        <option value="Q_1">Sokap Nama bokap</option>
+                        <option value="Q_2">Nama Nyokap</option>
+                        <option value="Q_3">Nama Sokap</option>
+                        <option value="Q_4">Nama Diskpa</option>
+                        <option value="Q_5">Nama Tukap</option>
+                    </select>
+                </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                <!-- Anwser -->
+                <div class="">
+                    <label for="answer">Your Anwser</label>
+                    <input type="text" class="form-control" id="answer" name="answer" placeholder="Your Anwser">
+                </div>
             </div>
 
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                </div>
+            </div>
+
+            <!-- Circles which indicates the steps of the form: -->
             <div style="text-align:center;margin-top:40px;">
                 <span class="step"></span>
                 <span class="step"></span>
             </div>
 
-
-            <script>
-                var currentTab = 0;
-                showTab(currentTab);
-
-                function showTab(stepNo) {
-                    var pageEle = document.getElementsByClassName("page");
-                    pageEle[stepNo].style.display = "block";
-                    if (stepNo == 0) {
-                        document.getElementById("prevBtn").style.display = "none";
-                    } else {
-                        document.getElementById("prevBtn").style.display = "inline";
-                    }
-                    if (stepNo == (pageEle.length - 1)) {
-                        document.getElementById("nextBtn").innerHTML = "Submit";
-                    } else {
-                        document.getElementById("nextBtn").innerHTML = "Next";
-                    }
-                    changeStepIndicator(stepNo)
-                }
-
-                function nextPrev(stepNo) {
-                    var pageEle = document.getElementsByClassName("page");
-                    if (stepNo == 1 && !checkForm()) return false;
-                    pageEle[currentTab].style.display = "none";
-                    currentTab = currentTab + stepNo;
-                    if (currentTab >= pageEle.length) {
-                        document.getElementById("regForm").submit();
-                        return false;
-                    }
-                    showTab(currentTab);
-                }
-
-                function checkForm() {
-                    var pageEle, inputEle, i, valid = true;
-                    pageEle = document.getElementsByClassName("page");
-                    inputEle = pageEle[currentTab].getElementsByTagName("input");
-                    for (i = 0; i < inputEle.length; i++) {
-                        if (inputEle[i].value == "") {
-                            inputEle[i].className += " invalid";
-                            valid = false;
-                        }
-                    }
-                    if (valid) {
-                        document.getElementsByClassName("step")[currentTab].className += " finish";
-                    }
-                    return valid;
-                }
-
-                function changeStepIndicator(stepNo) {
-                    var i, pageEle = document.getElementsByClassName("step");
-                    for (i = 0; i < pageEle.length; i++) {
-                        pageEle[i].className = pageEle[i].className.replace(" active", "");
-                    }
-                    pageEle[stepNo].className += " active";
-                }
-            </script>
         </form>
+
+        <script>
+            var currentTab = 0; // Current tab is set to be the first tab (0)
+            showTab(currentTab); // Display the current tab
+
+            function showTab(n) {
+                // This function will display the specified tab of the form ...
+                var x = document.getElementsByClassName("tab");
+                x[n].style.display = "block";
+                // ... and fix the Previous/Next buttons:
+                if (n == 0) {
+                    document.getElementById("prevBtn").style.display = "none";
+                } else {
+                    document.getElementById("prevBtn").style.display = "inline";
+                }
+                if (n == (x.length - 1)) {
+                    document.getElementById("nextBtn").innerHTML = "Submit";
+                } else {
+                    document.getElementById("nextBtn").innerHTML = "Next";
+                }
+                // ... and run a function that displays the correct step indicator:
+                fixStepIndicator(n)
+            }
+
+            function nextPrev(n) {
+                // This function will figure out which tab to display
+                var x = document.getElementsByClassName("tab");
+                // Exit the function if any field in the current tab is invalid:
+                if (n == 1 && !validateForm()) return false;
+                // Hide the current tab:
+                x[currentTab].style.display = "none";
+                // Increase or decrease the current tab by 1:
+                currentTab = currentTab + n;
+                // if you have reached the end of the form... :
+                if (currentTab >= x.length) {
+                    //...the form gets submitted:
+                    document.getElementById("regForm").submit();
+                    return false;
+                }
+                // Otherwise, display the correct tab:
+                showTab(currentTab);
+            }
+
+            function validateForm() {
+                // This function deals with validation of the form fields
+                var x, y, i, valid = true;
+                x = document.getElementsByClassName("tab");
+                y = x[currentTab].getElementsByTagName("input");
+                // A loop that checks every input field in the current tab:
+                for (i = 0; i < y.length; i++) {
+                    // If a field is empty...
+                    if (y[i].value == "") {
+                        // add an "invalid" class to the field:
+                        y[i].className += " invalid";
+                        // and set the current valid status to false:
+                        valid = false;
+                    }
+                }
+                // If the valid status is true, mark the step as finished and valid:
+                if (valid) {
+                    document.getElementsByClassName("step")[currentTab].className += " finish";
+                }
+                return valid; // return the valid status
+            }
+
+            function fixStepIndicator(n) {
+                // This function removes the "active" class of all steps...
+                var i, x = document.getElementsByClassName("step");
+                for (i = 0; i < x.length; i++) {
+                    x[i].className = x[i].className.replace(" active", "");
+                }
+                //... and adds the "active" class to the current step:
+                x[n].className += " active";
+            }
+        </script>
     </x-auth-card>
 </x-guest-layout>

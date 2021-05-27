@@ -29,15 +29,15 @@ Route::get('/contact')
     ->name('contact');
 
 // Home
-Route::get('/index', function () {
-    return view('cores.index');
-})->middleware(['auth'])->name('index');
+
+Route::get('/index', [InventoryController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('index');
 
 // Laporan
-Route::get('/laporan', function () {
-    InventoryController::class;
-    return view('cores.laporan');
-})->middleware(['auth'])->name('laporan');
+Route::get('/laporan', [InventoryController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('laporan');
 
 Route::post('/laporan', function () {
     return view('cores.laporan');
@@ -45,7 +45,7 @@ Route::post('/laporan', function () {
 
 // Transpage
 
-Route::get('/transpage', [InventoryController::class, 'index'])
+Route::get('/transpage', [InventoryController::class, 'transpage'])
     ->middleware(['auth'])
     ->name('transpage');
 Route::post('/transpage', function () {

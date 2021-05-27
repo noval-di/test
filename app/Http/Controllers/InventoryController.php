@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventory;
 use App\Models\Item;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\AssignOp\Concat;
 use Psr\Log\LogLevel;
+
+use function PHPUnit\Framework\isEmpty;
 
 class InventoryController extends Controller
 {
@@ -22,7 +25,16 @@ class InventoryController extends Controller
 
         $data = Inventory::all();
         // dd($data);
-        return view('cores.transpage', ['items' =>  $data]);
+        return view('cores.index', ['datas' =>  $data]);
+    }
+
+    public function transpage()
+    {
+        //
+
+        $data = Inventory::all();
+        // dd($data);
+        return view('cores.transpage', ['datas' =>  $data]);
     }
 
     /**
@@ -51,20 +63,12 @@ class InventoryController extends Controller
         ]);
 
         $data = $request->all();
-        // dd($data);
 
         $item = new Item;
         $item->name = $data['name'];
         $item->description = $data['description'];
         $item->quantity = $data['quantity'];
         $item->save();
-
-
-        // $item = Item::create([
-        //     'name' => $request->name,
-        //     'description' => $request->description,
-        //     'quantity' => $request->quantity
-        // ]);
 
         $loc_id = DB::table('locations')
             ->where('level', $data['level'])
@@ -79,15 +83,6 @@ class InventoryController extends Controller
         $inventory->date_out = $data['date_out'];
         $inventory->save();
 
-
-        // $inventory = Inventory::create([
-        //     'item_id' => $item->inventory()->associate,
-        //     'loc_id' => ,
-        //     'user_id' => $request->user_id,
-        //     'date_in' => $request->date_in,
-        //     'date_out' => $request->date_out,
-        // ]);
-
         return redirect('/transpage');
     }
 
@@ -98,7 +93,14 @@ class InventoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
-    { }
+    {
+
+        $data = Inventory::all();
+
+        if (isEmpty($request)) {
+            return view('cores.laporan', ['datas' =>  $data]);
+        }
+    }
 
     /**
      * Show the form for editing the specified resource.

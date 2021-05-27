@@ -27,37 +27,27 @@
                 <th>No</th>
                 <th>Nama Barang</th>
                 <th>Jumlah</th>
-                <th>Lokasi</th>
+                <th>Level</th>
+                <th>Shelf</th>
                 <th>Tgl Masuk</th>
                 <th>Tgl Keluar</th>
             </tr>
         </thead>
         <tbody>
+            <div hidden>{{$i = 1}}</div>
+            @foreach($datas as $item)
             <tr>
-                <td>No</td>
-                <td>Nama Barang</td>
-                <td>Jumlah</td>
-                <td>Lokasi</td>
-                <td>Tgl Masuk</td>
-                <td>Tgl Keluar</td>
+                <td>{{ $i++ }}</td>
+                <td>{{ $item->item->name }}</td>
+                <td>{{ $item->item->quantity }}</td>
+                <td>level, id:{{ $item->loc_id }}</td>
+                <td>Shelf</td>
+                <td>{{ $item->date_in }}</td>
+                <td>{{ $item->date_out }}</td>
             </tr>
-            <tr>
-                <td>No</td>
-                <td>Nama Barang</td>
-                <td>Jumlah</td>
-                <td>Lokasi</td>
-                <td>Tgl Masuk</td>
-                <td>Tgl Keluar</td>
-            </tr>
-            <tr>
-                <td>No</td>
-                <td>Nama Barang</td>
-                <td>Jumlah</td>
-                <td>Lokasi</td>
-                <td>Tgl Masuk</td>
-                <td>Tgl Keluar</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
+
 @endsection

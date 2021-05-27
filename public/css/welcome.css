@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;500;300;400&display=swap");
 
 *,
@@ -330,7 +331,7 @@ header label {
     background-size: 650px 650px;
     background-position: center;
     margin-bottom: 30px;
-    background-image: url(aa.png);
+    background-image: url(/images/aa.png);
 }
 
 .about .column .content {

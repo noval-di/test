@@ -5,7 +5,7 @@
         <h2>TAMBAH DATA</h2>
         <form method="POST" id="addItem">
             @csrf
-            <input name="user_id" class="hidden" value="{{Auth::user()->id}}"></input>
+            <input name="user_id" class="hidden" value="{{Auth::user()->id}}" hidden></input>
             <div class="form-group">
                 <label for="name">Nama Barang</label>
                 <input type="text" class="form-control" id="name" name="name">
@@ -17,7 +17,7 @@
             <div class="form-row">
                 <div class="form-group col-md-5">
                     <label for="shelf">Shelf</label>
-                    <select  class="form-control" id="shelf" name="shelf" type="text">
+                    <select class="form-control" id="shelf" name="shelf" type="text">
                         <optgroup label="Shelf A">
                             <option value="A0">A0</option>
                             <option value="A1">A1</option>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group col-md-5">
                     <label for="level">Level</label>
-                    <select class="form-select" aria-label="Default select example" type="text" id="level" name="level" >
+                    <select class="form-select" aria-label="Default select example" type="text" id="level" name="level">
                         <option selected>Select Level</option>
                         <option value="0">0</option>
                         <option value="1">1</option>

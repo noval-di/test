@@ -10,18 +10,12 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($datas as $item)
             <tr>
-                <td>Lemari</td>
-                <td>20 pcs</td>
+                <td>{{ $item->item->name }}</td>
+                <td>{{ $item->item->quantity }}</td>
             </tr>
-            <tr>
-                <td>Kulkas</td>
-                <td>30 pcs</td>
-            </tr>
-            <tr>
-                <td>Sepatu</td>
-                <td>200 pcs</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 
