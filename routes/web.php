@@ -39,15 +39,15 @@ Route::get('/laporan', [InventoryController::class, 'show'])
     ->middleware(['auth'])
     ->name('laporan');
 
-Route::post('/laporan', function () {
-    return view('cores.laporan');
-})->middleware(['auth'])->name('laporan');
+// Route::post('/laporan', function () {
+//     return view('cores.laporan');
+// })->middleware(['auth'])->name('laporan');
 
 // Transpage
-
 Route::get('/transpage', [InventoryController::class, 'transpage'])
     ->middleware(['auth'])
     ->name('transpage');
+
 Route::post('/transpage', function () {
     return view('cores.transpage');
 })->middleware(['auth'])->name('transpage');
@@ -70,6 +70,8 @@ Route::get('/backup', function () {
 Route::post('/backup', function () {
     return view('cores.backup');
 })->middleware(['auth'])->name('backupandrestore');
+
+Route::get('/download', [InventoryController::class, 'download']);
 
 // Biodata
 Route::get('/biodata', [BiodataController::class, 'show'])->middleware(['auth'])->name('biodata');

@@ -9,7 +9,11 @@ class Location extends Model
 {
     use HasFactory;
 
-    protected $table = 'locations';
+    // protected $table = 'locations';
 
-    
+
+    // public function inventory()
+    // {
+    //     return $this->hasOne(Inventory::class, 'loc_id', 'id');
+    // }
 }

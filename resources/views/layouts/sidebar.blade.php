@@ -22,7 +22,7 @@
         </li>
         <li>
             <x-nav-link :href="route('backup')" :active="request()->routeIs('backup')">
-                {{ __('backup / restore') }}
+                {{ __('Download Data') }}
             </x-nav-link>
         </li>
         <li>

@@ -19,6 +19,8 @@
         </tbody>
     </table>
 
+    {{ $datas->links("pagination::bootstrap-4")}}
+
     <br>
 
     <h2>TABEL TO DO LIST</h2>

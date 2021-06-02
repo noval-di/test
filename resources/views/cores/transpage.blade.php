@@ -16,14 +16,14 @@
             </tr>
         </thead>
         <tbody>
-            <div hidden>{{$i = 1}}</div>
+            <div hidden>{{$i = 0}}</div>
             @foreach($datas as $item)
             <tr>
-                <td>{{ $i++ }}</td>
+                <td>{{ $datas->firstItem() + $i++ }}</td>
                 <td>{{ $item->item->name }}</td>
                 <td>{{ $item->item->quantity }}</td>
-                <td>level, id:{{ $item->loc_id }}</td>
-                <td>Shelf</td>
+                <td>{{ $item->level }}</td>
+                <td>{{ $item->shelf }}</td>
                 <td>{{ $item->date_in }}</td>
                 <td>{{ $item->date_out }}</td>
                 <td>
@@ -36,7 +36,12 @@
             @endforeach
         </tbody>
     </table>
-</div>
-
-<a class="btn" href="/addItem" role="button" id="tambah_data">Tambah Data</a>
-@endsection
+    <div class="float-end">
+        {{ $datas->links("pagination::bootstrap-4")}}
+    </div>
+    <div class="float-start">
+        <div class="float-start">
+            <a class="btn" href="/addItem" role="button" id="tambah_data">Tambah Item</a>
+        </div>
+    </div>
+    @endsection

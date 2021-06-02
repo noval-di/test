@@ -1,13 +1,7 @@
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
      <div class="container-fluid">
-
-         <button type="button" id="sidebarCollapse" class="btn btn-info">
-             <i class="fas fa-align-justify"></i>
-             <span>Menu</span>
-         </button>
-
          <header>
-             <h3>WARE Warehouse</h3>
+             <h3 class="">WARE Warehouse</h3>
          </header>
          <div class="hidden sm:flex sm:items-center sm:ml-6">
              <x-dropdown align="right" width="48">

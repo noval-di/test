@@ -11,7 +11,8 @@ class Inventory extends Model
     protected $table = 'inventory';
     protected $fillable = [
         'item_id',
-        'loc_id',
+        'level',
+        'shelf',
         'user_id',
         'date_in',
         'date_out',
@@ -25,4 +26,8 @@ class Inventory extends Model
     {
         return $this->belongsTo(Item::class);
     }
+    // public function location()
+    // {
+    //     return $this->belongsTo(Location::class);
+    // }
 }
